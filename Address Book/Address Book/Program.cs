@@ -50,6 +50,13 @@ namespace Address_Book
                         ab.Display();
                         break;
                     case 4:
+                        Console.WriteLine("Enter the Contact Name to be Deleted: ");
+                        string user = Console.ReadLine();
+                        AddressBook abb = new AddressBook();
+                        abb.DeleteContact(user);
+                        abb.Display();
+                        break;
+                    case 5:
                         flag = false;
                         break;
                 }
