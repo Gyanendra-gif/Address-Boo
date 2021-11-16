@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Address_Book
 {
-    class Contact // This is Model Class Which is Only Responisible for Changing Purpose
+    public class Contact // This is Model Class Which is Only Responisible for Changing Purpose
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
