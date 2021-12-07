@@ -77,11 +77,11 @@ namespace Address_Book
             return;
         }
 
-        public void CheckDuplicateEntry(List<Contact> contacts, Contact contactBook)  // It Will Check For Duplicate Entry
+        public void CheckDuplicateEntry(List<Contact> addressList, Contact contactBook)  // It Will Check For Duplicate Entry
         {
-            foreach (var Details in contacts)
+            foreach (var Details in addressList)
             {
-                var person = contacts.Find(e => e.FirstName.Equals(contactBook.FirstName));
+                var person = addressList.Find(e => e.FirstName.Equals(contactBook.FirstName));
                 if (person != null)
                 {
                     Console.WriteLine("This Contact Already Exists Withe Same First Name: " +contactBook.FirstName);
@@ -90,6 +90,22 @@ namespace Address_Book
                 {
                     Console.WriteLine("Continue with Other");
                 }
+            }
+        }
+        public static void StoreCityList(string key, List<Contact> cityList, string city) // Store City List
+        {
+            List<Contact> CityList = cityList.FindAll(a => a.City.ToLower() == city);
+            foreach (var i in CityList)
+            {
+                Console.WriteLine("Found person \"{0}\" in Address Book \"{1}\" , residing in City {2}", i.FirstName, key, i.City);
+            }
+        }
+        public static void StoreStateList(string key, List<Contact> stateList, string state) // Display Person Names found in given State
+        {
+            List<Contact> StateList = stateList.FindAll(x => x.State.ToLower() == state);
+            foreach (var i in StateList)
+            {
+                Console.WriteLine("Found person \"{0}\" in Address Book \"{1}\" , residing in State {2}", i.FirstName, key, i.State);
             }
         }
     }
