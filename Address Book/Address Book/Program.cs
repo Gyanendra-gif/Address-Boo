@@ -4,10 +4,10 @@ namespace Address_Book
 {
     class Program
     {
-        Contact contact = new Contact();
         static void Main(string[] args)
         {
             bool flag = true;
+            AddressBook addressBook = new AddressBook();
             while (flag)
             {
                 Console.WriteLine("Enter your Choice Number to Execute the Address Program Press- 1-Contacts, 2-Add Contact, 3-Edit Contact, 4-Delete Contact, 5-Add Multiple Contact, 6-Refactor Method");
@@ -16,21 +16,20 @@ namespace Address_Book
                 {
                     case 1:
                         Console.WriteLine("Enter the Contact Information in Format of FirstName, LastName, Addr, City, State, Zip, Ph.No, Email.");
-                        Contact newContact = new Contact();
-                        newContact.FirstName = Console.ReadLine();
-                        newContact.LastName = Console.ReadLine();
-                        newContact.Address = Console.ReadLine();
-                        newContact.City = Console.ReadLine();
-                        newContact.State = Console.ReadLine();
-                        newContact.Zip = Console.ReadLine();
-                        newContact.PhoneNumber = Console.ReadLine();
-                        newContact.Email = Console.ReadLine();
+                        Contact contac = new Contact();
+                        contac.FirstName = Console.ReadLine();
+                        contac.LastName = Console.ReadLine();
+                        contac.Address = Console.ReadLine();
+                        contac.City = Console.ReadLine();
+                        contac.State = Console.ReadLine();
+                        contac.Zip = Console.ReadLine();
+                        contac.PhoneNumber = Console.ReadLine();
+                        contac.Email = Console.ReadLine();
                         break;
                     case 2:
                         Console.WriteLine("Enter the Contact Information to be Add in form of FirstName, LastName, Addr, City, State, Zip, Ph.No, Email.");
                         Console.WriteLine("Enter the Contact to be Add: ");
                         Contact contact = new Contact();
-                        AddressBook addressBook = new AddressBook();
                         addressBook.AddContact(contact);
                         contact.FirstName = Console.ReadLine();
                         contact.LastName = Console.ReadLine();
@@ -45,23 +44,20 @@ namespace Address_Book
                     case 3:
                         Console.WriteLine("Enter the Contact Name to be Edited: ");
                         string name = Console.ReadLine();
-                        AddressBook ab = new AddressBook();
-                        ab.EditContact(name);
-                        ab.Display();
+                        addressBook.EditContact(name);
+                        addressBook.Display();
                         break;
                     case 4:
                         Console.WriteLine("Enter the Contact Name to be Deleted: ");
                         string user = Console.ReadLine();
-                        AddressBook abb = new AddressBook();
-                        abb.DeleteContact(user);
-                        abb.Display();
+                        addressBook.DeleteContact(user);
+                        addressBook.Display();
                         break;
                     case 5:
                         Console.WriteLine("Enter the Contact Information to be Add in form of FirstName, LastName, Addr, City, State, Zip, Ph.No, Email.");
                         Console.WriteLine("Enter the Contact to be Add: ");
                         Contact con = new Contact();
-                        AddressBook abo = new AddressBook();
-                        abo.AddContact(con);
+                        addressBook.AddContact(con);
                         con.FirstName = Console.ReadLine();
                         con.LastName = Console.ReadLine();
                         con.Address = Console.ReadLine();
@@ -70,14 +66,13 @@ namespace Address_Book
                         con.Zip = Console.ReadLine();
                         con.PhoneNumber = Console.ReadLine();
                         con.Email = Console.ReadLine();
-                        abo.Display();
+                        addressBook.Display();
                         break;
                     case 6:
                         Console.WriteLine("Enter the Unique Contact to be added: ");
                         string nam = Console.ReadLine();
-                        AddressBook aboo = new AddressBook();
-                        aboo.AddUniqueContact(nam);
-                        aboo.DisplayUniqueContacts();
+                        addressBook.AddUniqueContact(nam);
+                        addressBook.DisplayUniqueContacts();
                         break;
                     case 7:
                         flag = false;

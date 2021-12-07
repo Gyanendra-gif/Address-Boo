@@ -48,7 +48,7 @@ namespace Address_Book
                 }
             }
         }
-        public void AddUniqueContact(string nam)
+        public void AddUniqueContact(string nam) // This Will Add Unique Contacts
         {
             foreach (var contact in addressList)
             {
@@ -59,9 +59,8 @@ namespace Address_Book
                 }
             }
         }
-        public void DisplayUniqueContacts()
+        public void DisplayUniqueContacts() // Maintain Dictionary of Addressbook Name to Addressbook
         {
-            // Maintain Dictionary of Addressbook Name to Addressbook
             Console.WriteLine("enter name of dictionary to display that contact details");
             string name = Console.ReadLine().ToLower();
             foreach (var contacts in dict)
@@ -76,6 +75,22 @@ namespace Address_Book
             }
             Console.WriteLine("Oops UniqueContacts does not exist!! Please create a UniquecontactList");
             return;
+        }
+
+        public void CheckDuplicateEntry(List<Contact> contacts, Contact contactBook)  // It Will Check For Duplicate Entry
+        {
+            foreach (var Details in contacts)
+            {
+                var person = contacts.Find(e => e.FirstName.Equals(contactBook.FirstName));
+                if (person != null)
+                {
+                    Console.WriteLine("This Contact Already Exists Withe Same First Name: " +contactBook.FirstName);
+                }
+                else
+                {
+                    Console.WriteLine("Continue with Other");
+                }
+            }
         }
     }
 }
