@@ -7,7 +7,7 @@ namespace Address_Book
     class AddressBook
     {
         List<Contact> addressList = new List<Contact>();
-        Dictionary<string, List<Contact>> dict = new Dictionary<string, List<Contact>>();
+        public static Dictionary<string, List<Contact>> mySystem = new Dictionary<string, List<Contact>>();
         public void AddContact(Contact contact) // This Method Will Add the Details of Customer
         {
             addressList.Add(contact);
@@ -55,7 +55,7 @@ namespace Address_Book
                 if (addressList.Contains(contact))
                 {
                     string uniqueName = Console.ReadLine();
-                    dict.Add(uniqueName, addressList);
+                    mySystem.Add(uniqueName, addressList);
                 }
             }
         }
@@ -63,7 +63,7 @@ namespace Address_Book
         {
             Console.WriteLine("enter name of dictionary to display that contact details");
             string name = Console.ReadLine().ToLower();
-            foreach (var contacts in dict)
+            foreach (var contacts in mySystem)
             {
                 if (contacts.Key == name)
                 {
@@ -92,21 +92,48 @@ namespace Address_Book
                 }
             }
         }
-        public static void StoreCityList(string key, List<Contact> cityList, string city) // Store City List
+        public static void PersonSearch()
         {
-            List<Contact> CityList = cityList.FindAll(a => a.City.ToLower() == city);
-            foreach (var i in CityList)
+            Dictionary<string, List<Contact>> cityPersons = new Dictionary<string, List<Contact>>();
+            Dictionary<string, List<Contact>> statePerson = new Dictionary<string, List<Contact>>();
+
+            Console.WriteLine("Enter the city that you want to search");
+            string cityKey = Console.ReadLine();
+            cityPersons[cityKey] = new List<Contact>();
+            Console.WriteLine("Enter the state that you want to search");
+            string stateKey = Console.ReadLine();
+            statePerson[stateKey] = new List<Contact>();
+            foreach (string addressBookName in mySystem.Keys)
             {
-                Console.WriteLine("Found person \"{0}\" in Address Book \"{1}\" , residing in City {2}", i.FirstName, key, i.City);
+                foreach (Contact contact in mySystem[addressBookName])
+                {
+                    if (cityKey.ToLower() == contact.City)
+                    {
+                        cityPersons[cityKey].Add(contact);
+                    }
+                    if (stateKey.ToLower() == contact.State)
+                    {
+                        statePerson[stateKey].Add(contact);
+                    }
+                }
             }
+            PersonSearchDisplay(cityPersons, statePerson, cityKey, stateKey);
         }
-        public static void StoreStateList(string key, List<Contact> stateList, string state) // Display Person Names found in given State
+
+        public static void PersonSearchDisplay(Dictionary<string, List<Contact>> cityPersons, Dictionary<string, List<Contact>> statePersons, string cityKey, string stateKey)
         {
-            List<Contact> StateList = stateList.FindAll(x => x.State.ToLower() == state);
-            foreach (var i in StateList)
+            Console.WriteLine("------------------- Persons in {0} city-------------------------", cityKey);
+            foreach (Contact contact in cityPersons[cityKey])
             {
-                Console.WriteLine("Found person \"{0}\" in Address Book \"{1}\" , residing in State {2}", i.FirstName, key, i.State);
+                Console.WriteLine("{0}", contact.FirstName);
             }
+            Console.WriteLine("Total count of persons in the city {0} is {1}", cityKey, cityPersons[cityKey].Count);
+            Console.WriteLine("--------------------Persons in {0} state", stateKey);
+            foreach (Contact contact in statePersons[stateKey])
+            {
+                Console.WriteLine("{0}", contact.FirstName);
+            }
+            Console.WriteLine("Total count of persons in the state {0} is {1}", stateKey, statePersons[stateKey].Count);
         }
     }
 }
