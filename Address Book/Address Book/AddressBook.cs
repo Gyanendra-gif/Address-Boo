@@ -93,7 +93,6 @@ namespace Address_Book
 
         public void DeleteContact(string user) // This Method Will Delete Particular Contact Detail Provided by User
         {
-            Contact delete = new Contact();
             foreach (var contact in addressList)
             {
                 if (contact.FirstName == user || contact.LastName == user)
@@ -130,7 +129,6 @@ namespace Address_Book
             Console.WriteLine("Oops UniqueContacts does not exist!! Please create a UniquecontactList");
             return;
         }
-
         public void CheckDuplicateEntry(List<Contact> addressList, Contact contactBook)  // It Will Check For Duplicate Entry
         {
             foreach (var Details in addressList)
@@ -146,7 +144,7 @@ namespace Address_Book
                 }
             }
         }
-        public static void PersonSearch()
+        public static void PersonSearch() // It Will Search For a Particular Person
         {
             Dictionary<string, List<Contact>> cityPersons = new Dictionary<string, List<Contact>>();
             Dictionary<string, List<Contact>> statePerson = new Dictionary<string, List<Contact>>();
@@ -173,21 +171,40 @@ namespace Address_Book
             }
             PersonSearchDisplay(cityPersons, statePerson, cityKey, stateKey);
         }
-
         public static void PersonSearchDisplay(Dictionary<string, List<Contact>> cityPersons, Dictionary<string, List<Contact>> statePersons, string cityKey, string stateKey)
         {
-            Console.WriteLine("------------------- Persons in {0} city-------------------------", cityKey);
+            Console.WriteLine(" Persons in {0} city", cityKey);
+            Console.WriteLine("Persons in {0} city is:", cityKey);
+
             foreach (Contact contact in cityPersons[cityKey])
             {
                 Console.WriteLine("{0}", contact.FirstName);
             }
             Console.WriteLine("Total count of persons in the city {0} is {1}", cityKey, cityPersons[cityKey].Count);
-            Console.WriteLine("--------------------Persons in {0} state", stateKey);
+
+            Console.WriteLine("Persons in {0} state", stateKey);            
+            Console.WriteLine("Persons in {0} state is", stateKey);
+
             foreach (Contact contact in statePersons[stateKey])
             {
                 Console.WriteLine("{0}", contact.FirstName);
             }
             Console.WriteLine("Total count of persons in the state {0} is {1}", stateKey, statePersons[stateKey].Count);
+        }
+        public static void AddressBookSorting()
+        {
+            Console.WriteLine("Enter the Addressbook name that you want to sort :");
+            string addressBookName = Console.ReadLine();
+            if (mySystem.ContainsKey(addressBookName))
+            {
+                mySystem[addressBookName].Sort((x, y) => x.FirstName.CompareTo(y.FirstName));
+                Console.WriteLine("Sorted");
+            }
+            else
+            {
+                Console.WriteLine("The given Addressbook does not exist. Please Enter a Valid Addressbook Name");
+                AddressBookSorting();
+            }
         }
     }
 }

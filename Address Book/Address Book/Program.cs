@@ -10,7 +10,7 @@ namespace Address_Book
             AddressBook addressBook = new AddressBook();
             while (flag)
             {
-                Console.WriteLine("Enter your Choice Number to Execute the Address Program Press- 1-Contacts, 2-Add Contact, 3-Edit Contact, 4-Delete Contact, 5-Add Multiple Contact, 6-Refactor Method");
+                Console.WriteLine("Enter your Choice Number to Execute the Address Program Press- 1-Contacts, 2-Add Contact, 3-Edit Contact, 4-Delete Contact, 5-Add Multiple Contact, 6-Refactor Method, 7-Person Search, 8-AddressBook Sorting,9-Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -75,6 +75,12 @@ namespace Address_Book
                         addressBook.DisplayUniqueContacts();
                         break;
                     case 7:
+                        AddressBook.PersonSearch();
+                        break;
+                    case 8:
+                        AddressBook.AddressBookSorting();
+                        break;
+                    case 9:
                         flag = false;
                         break;
                 }
