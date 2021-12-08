@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Address_Book
@@ -204,6 +205,39 @@ namespace Address_Book
             {
                 Console.WriteLine("The given Addressbook does not exist. Please Enter a Valid Addressbook Name");
                 AddressBookSorting();
+            }
+        }
+        public static void SortBy(string addressBookName)
+        {
+            Console.WriteLine("How do you want the Sort the Addressbook \n Enter\n1 to sort based on City \n2 to sort based on State\n3 to sort based on Zipcode");
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    mySystem[addressBookName].Sort((x, y) => x.City.CompareTo(y.City));
+                    Console.WriteLine("Sorted by City");
+                    break;
+                case "2":
+                    mySystem[addressBookName].Sort((x, y) => x.State.CompareTo(y.State));
+                    Console.WriteLine("Sorted by State");
+                    break;
+                case "3":
+                    mySystem[addressBookName].Sort((x, y) => x.Zip.CompareTo(y.Zip));
+                    Console.WriteLine("Sorted by ZipCode");
+                    break;
+            }
+        }
+        public static void ReadAddressBookUsingStreamReader() 
+        {
+            Console.WriteLine("The Contact List Using Stream Reader");
+            string path = @"E:\GitDemo\Address-Book\Address Book\Address Book\AddressBookWriteFile.txt";
+
+            using (StreamReader se = File.OpenText(path))
+            {
+                string s = " ";
+                while ((s = se.ReadLine()) != null)
+                {
+                    Console.WriteLine(s);
+                }
             }
         }
     }
