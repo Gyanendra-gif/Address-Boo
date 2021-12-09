@@ -1,6 +1,9 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Address_Book
@@ -237,6 +240,29 @@ namespace Address_Book
                 while ((s = se.ReadLine()) != null)
                 {
                     Console.WriteLine(s);
+                }
+            }
+        }
+        public static void ImplementAddressBookinCsv()
+        {
+
+            string importFilePath = @"E:\GitDemo\Address-Book\Address Book\Address Book\AddressBook.csv"; // Initialization
+            string exportFilePath = @"E:\GitDemo\Address-Book\Address Book\Address Book\ExportAddressBookContact.csv";
+
+            using (var reader = new StreamReader(importFilePath)) // Readaing CSV File
+            using (var csv = new CsvReader(reader, CultureInfo.CurrentCulture))
+            {
+                var records = csv.GetRecords<Contact>().ToList();
+                foreach (var addressData in records)
+                {
+                    Console.Write("\t" + addressData.FirstName + "\t" + addressData.LastName + "\t" +
+                       addressData.Address + "\t" + addressData.City + "\t" + addressData.State + "\t" + addressData.Zip);
+                }
+
+                using (var writer = new StreamWriter(exportFilePath)) // Writing CSV File
+                using (var csvExport = new CsvWriter(writer, CultureInfo.CurrentCulture))
+                {
+                    csvExport.WriteRecords(records);
                 }
             }
         }

@@ -1,0 +1,8 @@
+﻿﻿FirstName-Gyanendra
+LastName-Pratap
+Address-Dwarika Nagar
+PhoneNumber-7440922090
+EmailID-gyanendra1252@gmail.com
+City-Rewa
+State-MP
+ZIPcode-486001
